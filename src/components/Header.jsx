@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from '@reach/router'
 
-function Header() {
+export default function Header() {
     return (<>
         <h1>NC News</h1>
         <nav>
@@ -10,6 +10,3 @@ function Header() {
         </nav>
     </>)
 };
-
-export default Header;
-
