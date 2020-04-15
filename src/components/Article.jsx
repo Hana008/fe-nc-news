@@ -20,9 +20,9 @@ export default class Article extends Component {
                             <h3>{component.title}</h3>
                             <h4>author: {component.author}</h4>
                             <p>{component.body}</p>
-                            <Vote votes={component.votes} article_id={component.article_id}/>
+                            <Vote votes={component.votes} id={component.article_id} path={'articles'}/>
                             <p>comments: {component.comment_count}</p>
-                            <Comments/>
+                            <Comments article_id={component.article_id}/>
                         </article>
                     )
                 })

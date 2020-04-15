@@ -16,7 +16,7 @@ export default class Vote extends Component {
         )
     }
     handleClick = (vote) => {
-        api.patchVotes(this.props.article_id, vote)
+        api.patchVotes(this.props.id, vote, this.props.path)
         this.setState((currentState) => {return {votes: currentState.votes+ vote, disable: true}})
     }
 }
