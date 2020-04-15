@@ -10,8 +10,7 @@ export default class Articles extends Component {
     }
 
     componentDidMount() {
-        // this.props.topic -> "coding" / undefined
-        this.getArticles(this.props.topic)
+        this.fetchArticles(this.props.topic)
     }
     render() {
         if(this.state.isLoading) return <Loading/>
@@ -35,8 +34,8 @@ export default class Articles extends Component {
             </main>
         )
     }
-    getArticles = (topic) => {
-        return api.fetchArticles(topic).then(({articles}) => {
+    fetchArticles = (topic) => {
+        return api.getArticles(topic).then(({articles}) => {
             this.setState({ articles, isLoading: false})
         })
     }

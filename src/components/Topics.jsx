@@ -9,7 +9,7 @@ export default class Topics extends Component {
     }
 
     componentDidMount() {
-        this.getTopics()
+        this.fetchTopics()
     }
 
     render() {
@@ -26,8 +26,8 @@ export default class Topics extends Component {
         )
     }
 
-    getTopics = () => {
-        api.fetchTopics().then((topics) => {
+    fetchTopics = () => {
+        api.getTopics().then((topics) => {
             this.setState(topics)
         })
     }
