@@ -5,6 +5,7 @@ import Topics from './components/Topics';
 import Articles from './components/Articles';
 import Article from './components/Article';
 import Homepage from './components/Homepage';
+import Error from './components/Error'
 
 class App extends React.Component {
   state = {
@@ -20,6 +21,7 @@ class App extends React.Component {
           <Articles path="/articles" />
           <Article path="/articles/:article_id" user={this.state.user} />
           <Articles path="/topics/:topic" />
+          <Error default />
         </Router>
       </div>
     );

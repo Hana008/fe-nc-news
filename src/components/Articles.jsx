@@ -2,17 +2,20 @@ import React, { Component } from 'react';
 import * as api from '../utils/api';
 import { Link } from '@reach/router';
 import Loading from './Loading'
+import Error from './Error';
 
 export default class Articles extends Component {
     state = {
         articles: [],
-        isLoading: true
+        isLoading: true,
+        error: false
     }
 
     componentDidMount() {
         this.fetchArticles(this.props.topic)
     }
     render() {
+        if(this.state.error) return <Error errorMessage={this.state.error}/>
         if (this.state.isLoading) return <Loading />
         return (
             <main>
@@ -49,10 +52,14 @@ export default class Articles extends Component {
     }
     fetchArticles = (topic, sort, order) => {
         const toggle = !this.state.isLoading
-        console.log(toggle)
+        // console.log(toggle)
         return api.getArticles(topic, sort, order).then(({ articles }) => {
             this.setState({ articles, isLoading: false })
             //render loading while sorting or order queries
         })
+        .catch((err) => {
+            this.setState({error: err.response.data.msg})
+        })
+       
     }
 }
