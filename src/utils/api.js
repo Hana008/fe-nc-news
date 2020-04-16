@@ -4,7 +4,9 @@ const baseURL = 'https://nc-news-ltd.herokuapp.com/api'
 
 export const getArticles = (topic) => {
     return axios.get(`${baseURL}/articles`, { params: { topic } })
-        .then((response) => { return response.data })
+        .then((response) => {
+            return response.data
+        })
 };
 
 export const getTopics = () => {
@@ -18,16 +20,25 @@ export const patchVotes = (id, inc_votes, path) => {
 };
 
 export const getComments = (article_id, sort, order) => {
-    console.log('getting...', sort)
-    return axios.get(`${baseURL}/articles/${article_id}/comments`, {sort_by: sort, order: sort || order}).then((response) => {
-        return response.data
-    })
+    return axios.get(`${baseURL}/articles/${article_id}/comments`, { params: { sort_by: sort, order: order } })
+        .then((response) => {
+            return response.data
+        })
 };
 
 export const postComment = (comment, article_id, user) => {
-    return axios.post(`${baseURL}/articles/${article_id}/comments`, { username: user, body: comment })
+    return axios.post(`${baseURL}/articles/${article_id}/comments`, { username: user, body: comment }).then((response) => {
+        return response.data.comment
+    })
 };
 
 export const deleteComment = (comment_id) => {
     return axios.delete(`${baseURL}/comments/${comment_id}`)
-}
+};
+
+export const getArticle = (article_id) => {
+    return axios.get(`${baseURL}/articles/${article_id}`)
+        .then((response) => {
+            return response.data.article
+        })
+};

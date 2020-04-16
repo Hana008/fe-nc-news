@@ -11,22 +11,21 @@ export default class Comments extends Component {
         this.fetchComments()
     }
     render() {
-        console.log(this.state.comments)
         return (
             <section>
                 <h4>
                     COMMENTS
                     </h4>
                 <label htmlFor="sort">sort by: </label>
-                <select id="sort" onChange={(event) => {this.fetchComments(event.target.value)}}>
+                <select id="sort" onChange={(event) => { this.fetchComments(event.target.value, undefined) }}>
                     <option value="votes">votes</option>
                     <option value="comment_id">comment</option>
                     <option value="author">author</option>
                 </select>
                 <label htmlFor="order">order by: </label>
-                <select onChange={(event) => {this.fetchComments(event.target.value)}} id="order">
-                    <option value="asc">asc</option>
-                    <option value="desc">desc</option>
+                <select onChange={(event) => { this.fetchComments(undefined, event.target.value) }} id="order">
+                    <option value="asc">ascending</option>
+                    <option value="desc">descending</option>
                 </select>
                 <ul>
                     {this.state.comments.map((comment) => {
@@ -39,14 +38,13 @@ export default class Comments extends Component {
                         )
                     })}
                 </ul>
-                <CommentForm article_id={this.props.article_id} user={this.props.user} />
+                <CommentForm addComment={this.addComment} />
             </section>
         )
     }
 
     fetchComments = (sort, order) => {
         api.getComments(this.props.article_id, sort, order).then((comments) => {
-            console.log(comments)
             this.setState(comments)
         })
     }
@@ -60,6 +58,9 @@ export default class Comments extends Component {
         })
     }
 
-    handleSort = () => { console.log('sorting..') }
-
+    addComment = (comment) => {
+        api.postComment(comment, this.props.article_id, this.props.user).then((comment) => {
+            this.setState(currentState => { return { comments: [...currentState.comments, comment] } })
+        })
+    }
 }

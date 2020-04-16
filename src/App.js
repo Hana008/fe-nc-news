@@ -15,7 +15,7 @@ class App extends React.Component {
         <Header />
         <Router>
           <Topics path="/topics" />
-          <Articles path="/articles/*" />
+          <Articles path="/articles" />
           <Article path="/articles/:article_id" user={this.state.user} />
           <Articles path="/topics/:topic" />
         </Router>
