@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as api from '../utils/api'
 import Vote from './Vote';
 import CommentForm from './CommentForm';
+import Sort from './Sort';
 
 export default class Comments extends Component {
     state = {
@@ -16,17 +17,7 @@ export default class Comments extends Component {
                 <h4>
                     COMMENTS
                     </h4>
-                <label htmlFor="sort">sort by: </label>
-                <select id="sort" onChange={(event) => { this.fetchComments(event.target.value, undefined) }}>
-                    <option value="votes">votes</option>
-                    <option value="comment_id">comment</option>
-                    <option value="author">author</option>
-                </select>
-                <label htmlFor="order">order by: </label>
-                <select onChange={(event) => { this.fetchComments(undefined, event.target.value) }} id="order">
-                    <option value="asc">ascending</option>
-                    <option value="desc">descending</option>
-                </select>
+                <Sort fetchComments={this.fetchComments}/>
                 <ul>
                     {this.state.comments.map((comment) => {
                         return (

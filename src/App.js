@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Topics from './components/Topics';
 import Articles from './components/Articles';
 import Article from './components/Article';
+import Homepage from './components/Homepage';
 
 class App extends React.Component {
   state = {
@@ -12,8 +13,9 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Header />
+        <Header user={this.state.user}/>
         <Router>
+          <Homepage path="/" />
           <Topics path="/topics" />
           <Articles path="/articles" />
           <Article path="/articles/:article_id" user={this.state.user} />
