@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import * as api from '../utils/api'
 import { Link } from '@reach/router';
+import ErrorMessage from './ErrorMessage';
 
 export default class Topics extends Component {
     state = {
         topics: [],
-        articles: []
+        articles: [],
+        error: false
     }
 
     componentDidMount() {
@@ -13,6 +15,7 @@ export default class Topics extends Component {
     }
 
     render() {
+        if(this.state.error) return <ErrorMessage errorMessage={this.state.error}/>
         return (
             <main>
                 <ul>
@@ -29,6 +32,9 @@ export default class Topics extends Component {
     fetchTopics = () => {
         api.getTopics().then((topics) => {
             this.setState(topics)
+        })
+        .catch((err) => {
+            this.setState({ error: err.response.data.msg })
         })
     }
 

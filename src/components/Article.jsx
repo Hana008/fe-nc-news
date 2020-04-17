@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import * as api from '../utils/api';
 import Vote from './Vote';
 import Comments from './Comments';
-import Error from './Error';
+import ErrorMessage from './ErrorMessage';
 import Loading from './Loading';
 
 export default class Article extends Component {
@@ -17,7 +17,7 @@ export default class Article extends Component {
         this.fetchArticle()
     }
     render() {
-        if(this.state.error) return <Error errorMessage={this.state.error}/>;
+        if(this.state.error) return <ErrorMessage errorMessage={this.state.error}/>;
         if(this.state.isLoading) return <Loading/>;
         return (
             this.state.article.map((component) => {

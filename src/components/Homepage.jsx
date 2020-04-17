@@ -1,7 +1,7 @@
 import React from 'react';
 import * as api from '../utils/api';
 import {Link} from '@reach/router';
-import Error from './Error'
+import ErrorMessage from './ErrorMessage'
 
 export default class Homepage extends React.Component {
     state = {
@@ -13,7 +13,7 @@ export default class Homepage extends React.Component {
         this.getArticle()
     }
     render() {
-        if(this.state.error) return <Error errorMessage={this.state.error}/>
+        if(this.state.error) return <ErrorMessage errorMessage={this.state.error}/>
         return (
             <main>
                 <h2>Most popular article</h2>
@@ -25,6 +25,7 @@ export default class Homepage extends React.Component {
                     </article>
                 })}
                 <h2>Most popular topic</h2>
+                {this.getTopic()}
             </main>
         )
     }
@@ -37,4 +38,13 @@ export default class Homepage extends React.Component {
         })
        
     }
+
+    getTopic = () => {
+        api.getArticles().then((response) => {
+
+            console.log(response.articles)
+        })
+    }
+    
+    //get topics, create var for each, get articles, loop through articles, increment topic var for each article.topic, return topic var with biggest count, load that topic name and link
 }

@@ -3,19 +3,20 @@ import * as api from '../utils/api'
 import Vote from './Vote';
 import CommentForm from './CommentForm';
 import Sort from './Sort';
-import Error from './Error';
+import ErrorMessage from './ErrorMessage';
 import Loading from './Loading';
 
 export default class Comments extends Component {
     state = {
         comments: [],
-        isLoading: true
+        isLoading: true,
+        error: false
     }
     componentDidMount() {
         this.fetchComments()
     }
     render() {
-        if (this.state.error) return <Error errorMessage={this.state.error} />
+        if (this.state.error) return <ErrorMessage errorMessage={this.state.error} />
         if (this.state.isLoading) return <Loading />
         return (
             <section>
@@ -45,7 +46,7 @@ export default class Comments extends Component {
                 this.setState({ comments, isLoading: false })
             })
             .catch((err) => {
-                console.dir(err)
+                this.setState({ error: err.response.data.msg })
             })
     }
 
