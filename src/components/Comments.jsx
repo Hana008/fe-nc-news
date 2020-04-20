@@ -5,6 +5,7 @@ import CommentForm from './CommentForm';
 import Sort from './Sort';
 import ErrorMessage from './ErrorMessage';
 import Loading from './Loading';
+import styles from '../css/app.module.css'
 
 export default class Comments extends Component {
     state = {
@@ -23,6 +24,7 @@ export default class Comments extends Component {
                 <h4>
                     COMMENTS
                     </h4>
+                    <CommentForm addComment={this.addComment} />
                 <Sort fetchComments={this.fetchComments} />
                 <ul>
                     {this.state.comments.map((comment) => {
@@ -30,12 +32,11 @@ export default class Comments extends Component {
                             <li key={comment.comment_id}>
                                 <h5>{comment.author}</h5>
                                 <p>{comment.body}</p>
-                                {comment.author === this.props.user ? <button onClick={() => { this.removeComment(comment.comment_id) }}>delete</button> : <Vote id={comment.comment_id} votes={comment.votes} path={'comments'} />}
+                                {comment.author === this.props.user ? <button onClick={() => { this.removeComment(comment.comment_id) }} className={styles.button}>delete</button> : <Vote id={comment.comment_id} votes={comment.votes} path={'comments'} />}
                             </li>
                         )
                     })}
                 </ul>
-                <CommentForm addComment={this.addComment} />
             </section>
         )
     }
@@ -63,7 +64,7 @@ export default class Comments extends Component {
     addComment = (comment) => {
         api.postComment(comment, this.props.article_id, this.props.user)
             .then((comment) => {
-                this.setState(currentState => { return { comments: [...currentState.comments, comment] } })
+                this.setState(currentState => { return { comments: [comment, ...currentState.comments] } })
             })
             .catch((err) => {
                 this.setState({ error: err.response.data.msg })

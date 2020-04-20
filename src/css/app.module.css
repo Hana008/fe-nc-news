@@ -1,7 +1,7 @@
 .app {
     /* background-color: aqua; */
     display: grid;
-    grid-template-rows: 1fr, 2fr, 1fr;
+    grid-template-rows: 1fr auto 1fr;
     grid-template-areas:
         "header"
         "main"
@@ -14,30 +14,27 @@
 header {
     grid-area: header;
     background-color: grey;
-    position: fixed;
+    position: sticky;
     top: 0px;
     width:100%;
     text-align: center;
+    border-bottom: 3px solid rgb(13, 230, 230);
     /* border: 100px; */
     /* margin: 50px; */
-    z-index: 1;
+    /* z-index: 1; */
     /* padding: 50px; */
 }
 
 main {
     grid-area: main;
     padding: 50px;
-    padding-top: 200px;
-    margin: 150px;
-    /* border: 100px; */
+    margin: 50px;
     align-items: center;
-    border-top: 3px solid rgb(13, 230, 230);
     font-family: 'Lato', sans-serif;
 }
 
 footer {
     grid-area: footer;
-    /* background-color: cadetblue; */
     /* position: fixed; */
     /* bottom: 0; */
     width:100%;
@@ -63,28 +60,46 @@ footer {
            display: flex;
            flex-direction: column;
        }
+       h1 {
+           font-size: 50px;
+       }
+      main {
+          margin: 20px;
+          padding: 25px;
+      }
+      select {
+         display: flex;
+      }
+      span {
+          display: flex;
+      }
+      button, button:hover {
+        border: none;
+        background-color: white;
+    }
    }
 
    .loading img {
        display: inline;
 }
 
-img {
-    display: inline-block;
-    width: 50px;
-    height: 50px;
+.footer img {
+    max-width: 50px;
+    max-height: 50px;
+    align-items: center;
 }
 
  
-.mainArea {
+/* .mainArea {
     grid-area: main;
     border-top: 3px solid rgb(13, 230, 230);
-}
+} */
 
 form {
     font-size: medium;
     font-family: 'Prata', serif;
    border-top: 3px solid rgb(13, 230, 230);
+   padding: 20px;
 }
 
 input {
@@ -103,14 +118,16 @@ ul
 
 a, a:hover, a:focus, a:active {
     text-decoration: none;
-    margin: 100px;
+    /* margin: 100px; */
+    align-items: center;
     color: rgb(13, 230, 230);
     font-family: 'Prata', serif;
 }
 
 article {
     align-items: center;
-    padding: 100px;
+    padding-right: 150px;
+    padding-left: 150px;
 }
 
 section {
@@ -126,5 +143,42 @@ height: 250px;
 display: flex;
 background-color: grey;
 border-radius: 25%;
+display: inline-flex;
 }
 
+body {
+    margin: 0px;
+}
+
+nav {
+    display: flex;
+}
+
+select {
+    margin-right: 5px;
+    margin-left: 5px;
+    margin-bottom: 15px;
+}
+
+.sort, select {
+    float: right;
+    margin-bottom: 15px;
+}
+span {
+    margin: 10px;
+}
+
+.button {
+    border: 2px solid rgb(13, 230, 230);
+}
+
+.button:hover {
+    transition-duration: 0.4s;
+    background-color: rgb(13, 230, 230);
+    color: white;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+button, button:hover {
+    border: none;
+}

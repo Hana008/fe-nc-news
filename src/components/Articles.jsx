@@ -38,11 +38,13 @@ export default class Articles extends Component {
                         return (
                             <li key={article.article_id} >
                                 {this.props.topic ? <h3>{article.title}</h3> : <Link to={`/articles/${article.article_id}`}> <h3>{article.title}</h3></Link>}
-                                <p>Author: {article.author}</p>
-                                <p>{article.body.slice(0, 50) + '...'}</p>
-                                <p>Posted: {article.created_at.slice(0, 9)}</p>
-                                <p>{article.votes} people liked this</p>
-                                <p>Comments: {article.comment_count}</p>
+                                <p>{article.body.slice(0, 100) + '...'}</p>
+                                <p>
+                                <span role="img" aria-label="user">👤 {article.author}</span> 
+                                <span role="img" aria-label="posted">📮 {article.created_at.slice(0, 9)}</span>
+                                <span role="img" aria-label="votes">{article.votes} 👍</span>
+                                <span role="img" aria-label="comments">💬 {article.comment_count}</span>
+                                </p>
                             </li>
                         )
                     })}

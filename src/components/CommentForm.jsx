@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styles from '../css/app.module.css'
 
 export default class CommentForm extends Component {
     state = {
@@ -7,13 +8,15 @@ export default class CommentForm extends Component {
     render() {
         return (
             <form onSubmit={(event) => { this.handleSubmit(event) }}>
-                Join the conversation: 
+                Join the conversation:         
+                <br></br>
                 <br></br>
                 <label htmlFor="commentForm">
                 <input id="commentForm" value={this.state.comment} placeholder="type your comment..." onChange={(event) => { this.handleChange(event.target.value) }}></input>
                 </label>
                 <br></br>
-                <button >Submit</button>
+                <br></br>
+                <button className={styles.button}>Submit</button>
             </form>
         )
     }
