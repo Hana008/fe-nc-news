@@ -6,6 +6,8 @@ import Articles from './components/Articles';
 import Article from './components/Article';
 import Homepage from './components/Homepage';
 import ErrorMessage from './components/ErrorMessage'
+import Footer from './components/Footer';
+import styles from './css/app.module.css'
 
 class App extends React.Component {
   state = {
@@ -13,9 +15,9 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div className="App">
-        <Header user={this.state.user}/>
-        <Router>
+      <div className={styles.app}>
+        <Header user={this.state.user} />
+        <Router className={styles.mainArea}>
           <Homepage path="/" />
           <Topics path="/topics" />
           <Articles path="/articles" />
@@ -23,6 +25,7 @@ class App extends React.Component {
           <Articles path="/topics/:topic" />
           <ErrorMessage default />
         </Router>
+        <Footer />
       </div>
     );
   }

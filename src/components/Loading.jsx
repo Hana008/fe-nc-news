@@ -1,5 +1,7 @@
 import React from 'react';
+import loader from '../images/loader.gif';
+import styles from '../css/app.module.css'
 
 export default function Loading() {
-return(<h2>Loading...</h2>)
+return <img src={loader} alt="loading sign" className={styles.loading}></img>
 }

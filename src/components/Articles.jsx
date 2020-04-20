@@ -19,12 +19,12 @@ export default class Articles extends Component {
         if (this.state.isLoading) return <Loading />
         return (
             <main>
-                <h2>Articles</h2>
+                {this.props.topic?<h2>{this.props.topic + ' articles'}</h2>: <h2>Articles</h2> }
                 <label htmlFor="sort">sort</label>
                 <select id="sort" onClick={(event) => { this.fetchArticles(undefined, event.target.value) }}>
                     <option value="comment_count">number of comments</option>
                     <option value="created_at">date</option>
-                    <option value="votes">votes</option>
+                    <option value="votes">likes</option>
                     <option value="title">alphabetically</option>
                     <option value="author">author</option>
                 </select>
@@ -40,9 +40,9 @@ export default class Articles extends Component {
                                 {this.props.topic ? <h3>{article.title}</h3> : <Link to={`/articles/${article.article_id}`}> <h3>{article.title}</h3></Link>}
                                 <p>Author: {article.author}</p>
                                 <p>{article.body.slice(0, 50) + '...'}</p>
-                                <p>Created: {article.created_at.slice(0, 9)}</p>
-                                <p>Votes: {article.votes}</p>
-                                <p>Comment count: {article.comment_count}</p>
+                                <p>Posted: {article.created_at.slice(0, 9)}</p>
+                                <p>{article.votes} people liked this</p>
+                                <p>Comments: {article.comment_count}</p>
                             </li>
                         )
                     })}

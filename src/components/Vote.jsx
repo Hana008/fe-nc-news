@@ -13,8 +13,8 @@ export default class Vote extends Component {
         return (
             <section>
                 <p>{this.props.votes + this.state.votes} people liked this</p>
-                <button onClick={() => { this.handleClick(1) }} disabled={this.state.disable}>thumbs up</button>
-                <button onClick={() => { this.handleClick(-1) }} disabled={this.state.disable}>thumbs down</button>
+                <button onClick={() => { this.handleClick(1) }} disabled={this.state.disable}><span role="img" aria-label="thumbs up">👍</span></button>
+                <button onClick={() => { this.handleClick(-1) }} disabled={this.state.disable}><span role="img" aria-label="thumbs down">👎</span></button>
             </section>
         )
     }

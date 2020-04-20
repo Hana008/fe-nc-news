@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as api from '../utils/api'
 import { Link } from '@reach/router';
 import ErrorMessage from './ErrorMessage';
+import styles from '../css/app.module.css'
 
 export default class Topics extends Component {
     state = {
@@ -9,15 +10,15 @@ export default class Topics extends Component {
         articles: [],
         error: false
     }
-
+    
     componentDidMount() {
         this.fetchTopics()
     }
-
+    
     render() {
         if(this.state.error) return <ErrorMessage errorMessage={this.state.error}/>
         return (
-            <main>
+            <main className={styles.topicCard}>
                 <ul>
                     {this.state.topics.map((topic) => {
                         return <li key={topic.slug}>
@@ -37,5 +38,4 @@ export default class Topics extends Component {
             this.setState({ error: err.response.data.msg })
         })
     }
-
 }

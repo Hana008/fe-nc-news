@@ -1,0 +1,130 @@
+.app {
+    /* background-color: aqua; */
+    display: grid;
+    grid-template-rows: 1fr, 2fr, 1fr;
+    grid-template-areas:
+        "header"
+        "main"
+        "footer";
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    align-items: center;
+}
+
+header {
+    grid-area: header;
+    background-color: grey;
+    position: fixed;
+    top: 0px;
+    width:100%;
+    text-align: center;
+    /* border: 100px; */
+    /* margin: 50px; */
+    z-index: 1;
+    /* padding: 50px; */
+}
+
+main {
+    grid-area: main;
+    padding: 50px;
+    padding-top: 200px;
+    margin: 150px;
+    /* border: 100px; */
+    align-items: center;
+    border-top: 3px solid rgb(13, 230, 230);
+    font-family: 'Prata', serif;
+}
+
+footer {
+    grid-area: footer;
+    /* background-color: cadetblue; */
+    /* position: fixed; */
+    /* bottom: 0; */
+    width:100%;
+    text-align: center;
+}
+
+   h2, h3, h4, h5, h6 {
+    font-family: 'Prata', serif;
+    color: black;
+    border-top: 3px solid rgb(13, 230, 230);
+   }
+
+   h1
+   {
+    font-family: 'Prata', serif;
+    text-align: center;
+    color: rgb(13, 230, 230);
+    font-size: 100px;
+   }
+
+   @media only screen and (max-width: 815px) {
+       .app{
+           display: flex;
+           flex-direction: column;
+       }
+   }
+
+   .loading img {
+       display: inline;
+}
+
+img {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+}
+
+ 
+.mainArea {
+    grid-area: main;
+    border-top: 3px solid rgb(13, 230, 230);
+}
+
+form {
+    font-size: medium;
+    font-family: 'Prata', serif;
+   border-top: 3px solid rgb(13, 230, 230);
+}
+
+input {
+    width: 300px;
+    height: 25px;
+    font-family: 'Lato', sans-serif;
+    font-size: small;
+}
+
+ul
+{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+} 
+
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    margin: 100px;
+    color: rgb(13, 230, 230);
+    font-family: 'Prata', serif;
+}
+
+article {
+    align-items: center;
+    padding: 100px;
+}
+
+section {
+    border: 100px;
+}
+
+.topicCard li {
+font-size: 25px;
+align-items: center;
+margin: 100px;
+width: 250px;
+height: 250px;
+display: flex;
+background-color: grey;
+border-radius: 25%;
+}
+

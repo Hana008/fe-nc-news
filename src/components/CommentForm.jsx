@@ -7,8 +7,13 @@ export default class CommentForm extends Component {
     render() {
         return (
             <form onSubmit={(event) => { this.handleSubmit(event) }}>
-                <input value={this.state.comment} placeholder="type your comment..." onChange={(event) => { this.handleChange(event.target.value) }}></input>
-                <button >submit</button>
+                Join the conversation: 
+                <br></br>
+                <label htmlFor="commentForm">
+                <input id="commentForm" value={this.state.comment} placeholder="type your comment..." onChange={(event) => { this.handleChange(event.target.value) }}></input>
+                </label>
+                <br></br>
+                <button >Submit</button>
             </form>
         )
     }
