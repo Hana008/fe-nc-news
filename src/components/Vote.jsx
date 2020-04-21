@@ -13,9 +13,11 @@ export default class Vote extends Component {
         if (error) return <ErrorMessage errorMessage={error} />
         return (
             <section>
-                <p>{this.props.votes + votes} people liked this</p>
+                <br></br>
                 <button onClick={() => { this.handleClick(1) }} disabled={disable}><span role="img" aria-label="thumbs up">👍</span></button>
                 <button onClick={() => { this.handleClick(-1) }} disabled={disable}><span role="img" aria-label="thumbs down">👎</span></button>
+                <p>{this.props.votes + votes} people liked this</p>
+                <br></br>
             </section>
         )
     }

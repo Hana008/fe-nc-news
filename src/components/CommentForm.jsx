@@ -7,7 +7,7 @@ export default class CommentForm extends Component {
     }
     render() {
         return (
-            <form onSubmit={(event) => { this.submitComment(event) }}>
+            <form onSubmit={this.submitComment}>
                 Join the conversation:         
                 <br></br>
                 <br></br>
