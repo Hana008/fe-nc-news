@@ -22,7 +22,6 @@ export default class Articles extends Component {
         if (isLoading) return <Loading />
         return (
             <main>
-            <Loading />
                 {topic?<h2>{topic + ' articles'}</h2>: <h2>Articles</h2> }
                 <select id="sort" onClick={(event) => { this.fetchArticles(undefined, event.target.value) }}>
                     <option value="comment_count">number of comments</option>
