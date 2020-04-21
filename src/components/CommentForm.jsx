@@ -7,12 +7,12 @@ export default class CommentForm extends Component {
     }
     render() {
         return (
-            <form onSubmit={(event) => { this.handleSubmit(event) }}>
+            <form onSubmit={(event) => { this.submitComment(event) }}>
                 Join the conversation:         
                 <br></br>
                 <br></br>
                 <label htmlFor="commentForm">
-                <input id="commentForm" value={this.state.comment} placeholder="type your comment..." onChange={(event) => { this.handleChange(event.target.value) }}></input>
+                <input id="commentForm" value={this.state.comment} placeholder="type your comment..." onChange={(event) => { this.updateStateComment(event.target.value) }}></input>
                 </label>
                 <br></br>
                 <br></br>
@@ -21,11 +21,11 @@ export default class CommentForm extends Component {
         )
     }
 
-    handleChange = (text) => {
+    updateStateComment = (text) => {
         this.setState({ comment: text })
     }
 
-    handleSubmit = (event) => {
+    submitComment = (event) => {
         event.preventDefault()
         this.props.addComment(this.state.comment)
         this.setState({ comment: '' })

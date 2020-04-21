@@ -17,7 +17,7 @@ class App extends React.Component {
     return (
       <div className={styles.app}>
         <Header user={this.state.user} />
-        <Router className={styles.mainArea}>
+        <Router >
           <Homepage path="/" />
           <Topics path="/topics" />
           <Articles path="/articles" />

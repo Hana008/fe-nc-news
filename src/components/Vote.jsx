@@ -9,19 +9,21 @@ export default class Vote extends Component {
         error: false
     }
     render() {
-        if (this.state.error) return <ErrorMessage errorMessage={this.state.error} />
+        const {error, disable, votes} = this.state
+        if (error) return <ErrorMessage errorMessage={error} />
         return (
             <section>
-                <p>{this.props.votes + this.state.votes} people liked this</p>
-                <button onClick={() => { this.handleClick(1) }} disabled={this.state.disable}><span role="img" aria-label="thumbs up">👍</span></button>
-                <button onClick={() => { this.handleClick(-1) }} disabled={this.state.disable}><span role="img" aria-label="thumbs down">👎</span></button>
+                <p>{this.props.votes + votes} people liked this</p>
+                <button onClick={() => { this.handleClick(1) }} disabled={disable}><span role="img" aria-label="thumbs up">👍</span></button>
+                <button onClick={() => { this.handleClick(-1) }} disabled={disable}><span role="img" aria-label="thumbs down">👎</span></button>
             </section>
         )
     }
     handleClick = (vote) => {
+        this.setState({ disable: true })
         api.patchVotes(this.props.id, vote, this.props.path)
             .then(() => {
-                this.setState((currentState) => { return { votes: currentState.votes + vote, disable: true } })
+                this.setState((currentState) => { return { votes: currentState.votes + vote } })
             })
             .catch((err) => {
                 this.setState({ error: err.response.data.msg })

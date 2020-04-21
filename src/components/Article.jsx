@@ -11,28 +11,30 @@ export default class Article extends Component {
         error: false,
         isLoading: true
     }
-    
+
     componentDidMount() {
         this.fetchArticle()
     }
     render() {
-        if(this.state.error) return <ErrorMessage errorMessage={this.state.error}/>;
-        if(this.state.isLoading) return <Loading/>;
+        const { error, isLoading, article } = this.state
+        if (error) return <ErrorMessage errorMessage={error} />;
+        if (isLoading) return <Loading />;
         return (
             <main>
-                {this.state.article.map((component) => {
-                return (
-                    <article key={component.article_id}>
-                        <h3>{component.title}</h3>
-                        <h4>author {component.author}</h4>
-                        <p>{component.body}</p>
-                        <Vote votes={component.votes} id={component.article_id} path={'articles'} />
-                        <p>{component.comment_count} comments</p>
-                        <br></br>
-                        <Comments article_id={component.article_id} user={this.props.user} />
-                    </article>
-                )
-            })}
+                {article.map((component) => {
+                    const { article_id, title, author, body, votes, comment_count } = component
+                    return (
+                        <article key={article_id}>
+                            <h3>{title}</h3>
+                            <h4>Author: {author}</h4>
+                            <p>{body}</p>
+                            <Vote votes={votes} id={article_id} path={'articles'} />
+                            <p>{comment_count} comments</p>
+                            <br></br>
+                            <Comments article_id={article_id} user={this.props.user} />
+                        </article>
+                    )
+                })}
             </main>
         )
     }
@@ -42,8 +44,8 @@ export default class Article extends Component {
             .then((article) => {
                 this.setState({ article: [article], isLoading: false })
             })
-            .catch((err)=> {
-                this.setState({error: err.response.data.msg})
+            .catch((err) => {
+                this.setState({ error: err.response.data.msg })
             })
     }
 }

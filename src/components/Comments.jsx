@@ -8,31 +8,36 @@ import Loading from './Loading';
 import styles from '../css/app.module.css'
 
 export default class Comments extends Component {
+
     state = {
         comments: [],
         isLoading: true,
         error: false
     }
+
     componentDidMount() {
         this.fetchComments()
     }
+
     render() {
-        if (this.state.error) return <ErrorMessage errorMessage={this.state.error} />
-        if (this.state.isLoading) return <Loading />
+        const { error, isLoading, comments } = this.state
+        if (error) return <ErrorMessage errorMessage={error} />
+        if (isLoading) return <Loading />
         return (
             <section>
                 <h4>
                     COMMENTS
                     </h4>
-                    <CommentForm addComment={this.addComment} />
+                <CommentForm addComment={this.addComment} />
                 <Sort fetchComments={this.fetchComments} />
                 <ul>
-                    {this.state.comments.map((comment) => {
+                    {comments.map((comment) => {
+                        const { comment_id, author, body, votes } = comment
                         return (
-                            <li key={comment.comment_id}>
-                                <h5>{comment.author}</h5>
-                                <p>{comment.body}</p>
-                                {comment.author === this.props.user ? <button onClick={() => { this.removeComment(comment.comment_id) }} className={styles.button}>delete</button> : <Vote id={comment.comment_id} votes={comment.votes} path={'comments'} />}
+                            <li key={comment_id}>
+                                <h5>{author}</h5>
+                                <p>{body}</p>
+                                {author === this.props.user ? <button onClick={() => { this.removeComment(comment_id) }} className={styles.button}>delete</button> : <Vote id={comment_id} votes={votes} path={'comments'} />}
                             </li>
                         )
                     })}
@@ -43,7 +48,7 @@ export default class Comments extends Component {
 
     fetchComments = (sort, order) => {
         api.getComments(this.props.article_id, sort, order)
-            .then(({comments}) => {
+            .then(({ comments }) => {
                 this.setState({ comments, isLoading: false })
             })
             .catch((err) => {
@@ -53,11 +58,14 @@ export default class Comments extends Component {
 
     removeComment = (comment_id) => {
         api.deleteComment(comment_id)
-            .then(() => {
-                const comments = this.state.comments.filter(comment => {
-                    return comment.comment_id !== comment_id
-                })
-                this.setState({ comments })
+            .then(this.setState((state) => {
+                const comments = state.comments.filter((comment) => {
+                    return comment.comment_id !== comment_id;
+                });
+                return { comments };
+            }))
+            .catch((err) => {
+                this.setState({ error: err.response.data.msg })
             })
     }
 

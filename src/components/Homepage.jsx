@@ -10,18 +10,20 @@ export default class Homepage extends React.Component {
         error: false
     }
     componentDidMount() {
-        this.getArticle()
+        this.fetchArticle()
     }
     render() {
-        if(this.state.error) return <ErrorMessage errorMessage={this.state.error}/>
+        const {error, article} = this.state
+        if(error) return <ErrorMessage errorMessage={error}/>
         return (
             <main>
-                {this.state.article.map((component) => {
-                    return <article key={component.article_id}>
+                {article.map((component) => {
+                    const {article_id, title, author, votes} = component;
+                    return <article key={article_id}>
                     <h2>Most popular article</h2>
-                        <Link to={`/articles/${component.article_id}`}><p>{component.title}</p> </Link>
-                        <p>written by {component.author}</p>
-                        <p>{component.votes} people liked this</p>
+                        <Link to={`/articles/${article_id}`}><p>{title}</p> </Link>
+                        <p>written by {author}</p>
+                        <p>{votes} people liked this</p>
                     </article>
                 })}
                 {/* <h2>Most popular topic</h2>
@@ -29,7 +31,7 @@ export default class Homepage extends React.Component {
             </main>
         )
     }
-    getArticle = () => {
+    fetchArticle = () => {
         api.getArticles(undefined, 'votes').then((response) => {
             this.setState({ article: [response.articles[0]] })
         })

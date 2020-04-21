@@ -16,13 +16,15 @@ export default class Topics extends Component {
     }
     
     render() {
-        if(this.state.error) return <ErrorMessage errorMessage={this.state.error}/>
+        const {topics, error} = this.state
+        if(error) return <ErrorMessage errorMessage={error}/>
         return (
             <main className={styles.topicCard}>
                 <ul>
-                    {this.state.topics.map((topic) => {
-                        return <li key={topic.slug}>
-                            <Link to={`/topics/${topic.slug}`}>{topic.slug}</Link>
+                    {topics.map((topic) => {
+                        const {slug} = topic
+                        return <li key={slug} className={styles.topicLinkContainer}>
+                            <Link to={`/topics/${slug}`}>{slug}</Link>
                         </li>
                     })}
                 </ul>
