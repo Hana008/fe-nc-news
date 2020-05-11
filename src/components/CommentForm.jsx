@@ -12,7 +12,7 @@ export default class CommentForm extends Component {
                 <br></br>
                 <br></br>
                 <label htmlFor="commentForm">
-                <input id="commentForm" value={this.state.comment} placeholder="type your comment..." onChange={(event) => { this.updateStateComment(event.target.value) }}></input>
+                <input id="commentForm" value={this.state.comment} placeholder="*type your comment..." onChange={(event) => { this.updateStateComment(event.target.value) }}></input>
                 </label>
                 <br></br>
                 <br></br>

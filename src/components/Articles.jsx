@@ -46,7 +46,7 @@ export default class Articles extends Component {
                                 <p>{body.slice(0, 100) + '...'}</p>
                                 <p>
                                 <span role="img" aria-label="user">👤 {author}</span> 
-                                <span role="img" aria-label="posted">📮 {created_at.slice(0, 9)}</span>
+                                <span role="img" aria-label="posted">📮 {created_at.slice(0, 9).split('-').reverse().join('-')}</span>
                                 <span role="img" aria-label="votes">{votes} 👍</span>
                                 <span role="img" aria-label="comments">💬 {comment_count}</span>
                                 </p>
